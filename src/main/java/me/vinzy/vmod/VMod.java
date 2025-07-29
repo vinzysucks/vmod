@@ -1,6 +1,8 @@
 package me.vinzy.vmod;
 
 import me.vinzy.vmod.commands.CommandVMod;
+import me.vinzy.vmod.utils.GuiUtils;
+import me.vinzy.vmod.utils.PacketUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -45,7 +47,7 @@ public class VMod {
         int y = 10;
 
         event.buttonList.add(new GuiButton(CLOSE_BUTTON_ID, x, y, 110, 20, "Close Without Packet"));
-        String blinkLabel = "Blink: " + (CommandVMod.isBlinkEnabled()
+        String blinkLabel = "Blink: " + (PacketUtils.isBlinkEnabled()
                 ? EnumChatFormatting.GREEN + "Enabled"
                 : EnumChatFormatting.RED + "Disabled");
         toggleBlinkButton = new GuiButton(TOGGLE_BLINK_BUTTON_ID, x, y + 25, 110, 20, blinkLabel);
@@ -55,21 +57,11 @@ public class VMod {
     @SubscribeEvent
     public void onGuiButton(GuiScreenEvent.ActionPerformedEvent.Post event) {
         if (event.button.id == CLOSE_BUTTON_ID) {
-            mc.displayGuiScreen(null);
-            mc.thePlayer.addChatMessage(new ChatComponentText(
-                    PREFIX + "Soft closed GUI."));
+            GuiUtils.saveAndCloseScreen();
         }
 
         if (event.button.id == TOGGLE_BLINK_BUTTON_ID) {
-            CommandVMod.toggleBlink();
-
-            boolean blinkEnabled = CommandVMod.isBlinkEnabled();
-            event.button.displayString = "Blink: " + (blinkEnabled
-                    ? EnumChatFormatting.GREEN + "Enabled"
-                    : EnumChatFormatting.RED + "Disabled");
-
-            mc.thePlayer.addChatMessage(new ChatComponentText(
-                    PREFIX + "Blink " + (blinkEnabled ? "enabled" : "disabled")));
+            PacketUtils.toggleBlink();
         }
     }
 }

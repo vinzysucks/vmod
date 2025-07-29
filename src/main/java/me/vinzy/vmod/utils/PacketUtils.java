@@ -4,6 +4,7 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
+import me.vinzy.vmod.VMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.network.INetHandler;
@@ -22,6 +23,25 @@ import java.util.LinkedList;
 
 public class PacketUtils {
     private static final String PREFIX = EnumChatFormatting.DARK_PURPLE + "[VMod] " + EnumChatFormatting.RESET;
+    private static boolean blinkEnabled = false;
+
+    public static void toggleBlink() {
+        blinkEnabled = !blinkEnabled;
+        VMod.toggleBlinkButton.displayString = "Blink: " + (blinkEnabled
+                ? EnumChatFormatting.GREEN + "Enabled"
+                : EnumChatFormatting.RED + "Disabled");
+        VMod.mc.thePlayer.addChatMessage(new ChatComponentText(
+                VMod.PREFIX + "Blink " + (blinkEnabled ? "enabled" : "disabled")));
+        if (blinkEnabled) {
+            disableWriting();
+        } else {
+            enableWriting();
+        }
+    }
+
+    public static boolean isBlinkEnabled() {
+        return blinkEnabled;
+    }
 
     /**
      * The Packet Disabler

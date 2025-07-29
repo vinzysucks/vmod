@@ -12,6 +12,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 
+//Shoutout my goat blendy for donating me his coding skills & doclic's code
+
 @Mixin(Minecraft.class)
 public abstract class MixinKeyBinding {
     @Unique

@@ -1,5 +1,5 @@
 package me.vinzy.vmod;
 
-public class VModConfig{
+public class VModConfig {
 }
 
