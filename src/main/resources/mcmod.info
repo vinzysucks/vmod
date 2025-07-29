@@ -1,0 +1,16 @@
+[
+{
+  "modid": "vmod",
+  "name": "VMod",
+  "description": "super duper duping mod",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["vinzy", "s3551", "blendydev", "yblobby", "beef_stew420", "traox_", "popbob", "farmzie", "miningfreakyhat", "astra"],
+  "credits": "vinzy",
+  "logoFile": "vmod.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]
