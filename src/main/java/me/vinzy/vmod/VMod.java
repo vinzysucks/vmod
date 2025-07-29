@@ -1,6 +1,7 @@
 package me.vinzy.vmod;
 
 import me.vinzy.vmod.commands.CommandVMod;
+import me.vinzy.vmod.utils.ConfigFile;
 import me.vinzy.vmod.utils.GuiUtils;
 import me.vinzy.vmod.utils.PacketUtils;
 import net.minecraft.client.Minecraft;
@@ -26,14 +27,15 @@ public class VMod {
     public static final String PREFIX = EnumChatFormatting.DARK_PURPLE + "[VMod] " + EnumChatFormatting.RESET;
     private static final int CLOSE_BUTTON_ID = 1420;
     private static final int TOGGLE_BLINK_BUTTON_ID = 1421;
-
     public static GuiButton toggleBlinkButton;
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         ClientCommandHandler.instance.registerCommand(new CommandVMod());
-        MinecraftForge.EVENT_BUS.register(this); // Registering event handler
+        MinecraftForge.EVENT_BUS.register(this);
+        ConfigFile.checkForConfig();
     }
+
 
     @SubscribeEvent
     public void onGuiInit(GuiScreenEvent.InitGuiEvent.Post event) {

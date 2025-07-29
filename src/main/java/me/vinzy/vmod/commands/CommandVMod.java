@@ -1,7 +1,8 @@
 package me.vinzy.vmod.commands;
 
-import me.vinzy.vmod.VModConfig;
-import me.vinzy.vmod.utils.PacketUtils;
+import me.vinzy.vmod.VMod;
+import me.vinzy.vmod.utils.ConfigFile;
+import me.vinzy.vmod.utils.GhostBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
@@ -29,14 +30,19 @@ public class CommandVMod extends CommandBase {
             return;
         }
 
-        // Handle "help" or invalid commands
         String sub = args[0].toLowerCase();
 
         if (sub.equals("help")) {
             sender.addChatMessage(new ChatComponentText(PREFIX + "Available subcommands:"));
             sender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_PURPLE + "/vmod" + EnumChatFormatting.GRAY + " - Open the VMod GUI"));
             sender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_PURPLE + "/vmod help" + EnumChatFormatting.GRAY + " - Show this help menu"));
-            // Add more help lines if needed
+            sender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_PURPLE + "/vmod restoreghosts" + EnumChatFormatting.GRAY + " - Restores ghost blocks"));
+            sender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_PURPLE + "/vmod reloadConfig" + EnumChatFormatting.GRAY + " - Reloads config"));
+        } else if (sub.equals("restoreghosts")) {
+            GhostBlock.restoreghosts();
+        } else if (sub.equals("reloadconfig")) {
+            ConfigFile.checkForConfig();
+            VMod.mc.thePlayer.addChatMessage(new ChatComponentText(VMod.PREFIX + "Reloaded config."));
         } else {
             sender.addChatMessage(new ChatComponentText(PREFIX + EnumChatFormatting.RED + "Unknown subcommand. Use /vmod help"));
         }
@@ -44,6 +50,6 @@ public class CommandVMod extends CommandBase {
 
     @Override
     public int getRequiredPermissionLevel() {
-        return 0; // Allow all players to use
+        return 0;
     }
 }

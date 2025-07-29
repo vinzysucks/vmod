@@ -11,25 +11,20 @@ public class ModuleManager {
     public static void handleKeybinding (int key) {
         GuiScreen gui = Minecraft.getMinecraft().currentScreen;
         if (!(gui instanceof GuiContainer || gui == null )) return;
-        switch (key) {
-            case Keyboard.KEY_B:
-                if(VMod.toggleBlinkButton == null) {
-                    break;
-                }
-                PacketUtils.toggleBlink();
-                break;
-
-            case Keyboard.KEY_F6:
-                GuiUtils.saveAndCloseScreen();
-            break;
-
-            case Keyboard.KEY_V:
-                GuiUtils.displayGUI();
-            break;
-
-            case Keyboard.KEY_G:
-                GhostBlock.deleteblock();
-            break;
+        if(key == Keyboard.KEY_NONE) return;
+        if (key == ConfigFile.blink_Key) {
+            if (VMod.toggleBlinkButton == null) {
+                return;
+            }
+            PacketUtils.toggleBlink();
+        } else if (key == ConfigFile.saveGui_Key) {
+            GuiUtils.saveAndCloseScreen();
+        } else if (key == ConfigFile.ghostBlock_Key) {
+            GhostBlock.deleteblock();
+        } else if (key == ConfigFile.restoreGhosts_Key) {
+            GhostBlock.restoreghosts();
+        } else if (key == ConfigFile.reopenGui_Key){
+            GuiUtils.displayGUI();
         }
 
     }
