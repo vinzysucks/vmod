@@ -26,6 +26,10 @@ public class ModuleManager {
             case Keyboard.KEY_V:
                 GuiUtils.displayGUI();
             break;
+
+            case Keyboard.KEY_G:
+                GhostBlock.deleteblock();
+            break;
         }
 
     }
