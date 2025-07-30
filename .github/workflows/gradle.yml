@@ -62,7 +62,6 @@ jobs:
           name: ${{ github.ref_name }}
           artifacts: "release/*.jar"
           allowUpdates: true
-          replaceArtifacts: true
           artifactErrorsFailBuild: true
           generateReleaseNotes: true
           prerelease: ${{ contains(github.ref_name, '-rc') || contains(github.ref_name, '-beta') || contains(github.ref_name, '-alpha') }}
@@ -77,7 +76,6 @@ jobs:
           commit: ${{ github.sha }}
           artifacts: "release/*.jar"
           allowUpdates: true
-          replaceArtifacts: true
           artifactErrorsFailBuild: true
           generateReleaseNotes: true
           prerelease: true
