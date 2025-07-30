@@ -53,13 +53,31 @@ jobs:
           done
           ls -lah release
 
-      - name: Create GitHub Release
+      # If this is a tag push, publish using the tag name (normal release)
+      - name: Create/Update GitHub Release (tags)
+        if: startsWith(github.ref, 'refs/tags/')
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ github.ref_name }}
           name: ${{ github.ref_name }}
           artifacts: "release/*.jar"
+          allowUpdates: true
+          replaceArtifacts: true
           artifactErrorsFailBuild: true
           generateReleaseNotes: true
-          draft: false
           prerelease: ${{ contains(github.ref_name, '-rc') || contains(github.ref_name, '-beta') || contains(github.ref_name, '-alpha') }}
+
+      # For non-tag commits, publish numbered pre-releases using the workflow run number
+      - name: Create GitHub Pre-release (commits)
+        if: "!startsWith(github.ref, 'refs/tags/')"
+        uses: ncipollo/release-action@v1
+        with:
+          tag: pre-${{ github.run_number }}
+          name: pre-${{ github.run_number }}
+          commit: ${{ github.sha }}
+          artifacts: "release/*.jar"
+          allowUpdates: true
+          replaceArtifacts: true
+          artifactErrorsFailBuild: true
+          generateReleaseNotes: true
+          prerelease: true
