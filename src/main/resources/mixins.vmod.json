@@ -4,7 +4,10 @@
   "package": "me.vinzy.vmod.mixins",
   "refmap": "mixins.vmod.refmap.json",
   "compatibilityLevel": "JAVA_8",
-  "mixins": ["MixinKeyBinding"],
+  "mixins": [
+    "MixinKeyBinding",
+    "MixinEditSign"
+  ],
   "client": [
     "MixinMinecraft"
   ],
