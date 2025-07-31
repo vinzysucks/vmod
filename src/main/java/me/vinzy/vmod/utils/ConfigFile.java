@@ -18,6 +18,8 @@ public class ConfigFile {
     public static int ghostBlock_Key = Keyboard.KEY_NONE;
     public static int restoreGhosts_Key = Keyboard.KEY_NONE;
     public static int reopenGui_Key = Keyboard.KEY_NONE;
+    public static int toggleTouch_Key = Keyboard.KEY_NONE;
+    public static int printNbt_Key = Keyboard.KEY_NONE;
 
     private static void newKeybindConfig() {
         File configFile = new File(Loader.instance().getConfigDir(), "vmod_keybinds.json");
@@ -27,6 +29,8 @@ public class ConfigFile {
         jsonObject.addProperty("ghostblock", Keyboard.KEY_G);
         jsonObject.addProperty("reopengui", Keyboard.KEY_V);
         jsonObject.addProperty("restoreghosts", Keyboard.KEY_NONE);
+        jsonObject.addProperty("toggletouch", Keyboard.KEY_J);
+        jsonObject.addProperty("printnbt", Keyboard.KEY_BACKSLASH);
         try {
             FileWriter config = new FileWriter(configFile);
             config.write(jsonObject.toString());
@@ -52,6 +56,9 @@ public class ConfigFile {
             ghostBlock_Key = jsonObject.has("ghostblock") ? jsonObject.get("ghostblock").getAsInt() : Keyboard.KEY_NONE;
             restoreGhosts_Key = jsonObject.has("restoreghosts") ? jsonObject.get("restoreghosts").getAsInt() : Keyboard.KEY_NONE;
             reopenGui_Key = jsonObject.has("reopengui") ? jsonObject.get("reopengui").getAsInt() : Keyboard.KEY_NONE;
+            toggleTouch_Key = jsonObject.has("toggletouch") ? jsonObject.get("toggletouch").getAsInt() : Keyboard.KEY_NONE;
+            printNbt_Key = jsonObject.has("printnbt") ? jsonObject.get("printnbt").getAsInt() : Keyboard.KEY_NONE;
+
         } catch (IOException e) {
             e.printStackTrace();
         }
