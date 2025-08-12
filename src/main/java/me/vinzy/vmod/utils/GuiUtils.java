@@ -36,6 +36,7 @@ public class GuiUtils {
     public static void printNBT () {
         GuiContainer container = (GuiContainer) Minecraft.getMinecraft().currentScreen;
         Slot slot = container.getSlotUnderMouse();
+        if (slot == null) return;
         ItemStack item = slot.getStack();
         if (item != null) {
             NBTTagCompound nbt = item.serializeNBT();

@@ -12,7 +12,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 
-//Shoutout my goat blendy for donating me his coding skills & doclic's code
+//Shoutout my goat blendy (hi) for donating me coding skills & doclic's code
+//tnp on top
 
 @Mixin(Minecraft.class)
 public abstract class MixinKeyBinding {
