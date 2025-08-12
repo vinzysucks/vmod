@@ -35,6 +35,7 @@ public class GuiUtils {
 
     public static void printNBT () {
         GuiContainer container = (GuiContainer) Minecraft.getMinecraft().currentScreen;
+        if (Minecraft.getMinecraft().currentScreen == null) return;
         Slot slot = container.getSlotUnderMouse();
         if (slot == null) return;
         ItemStack item = slot.getStack();
