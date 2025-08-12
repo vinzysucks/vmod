@@ -29,7 +29,7 @@ public class ModuleManager {
                     Field editLineField = signGui.getClass().getDeclaredField("field_146851_h"); //editLine
                     titleSignField.setAccessible(true);
                     editLineField.setAccessible(true);
-                    String lineContent = ((TileEntitySign) titleSignField.get(signGui)).signText[(int) editLineField.get(signGui)].getFormattedText();
+                    String lineContent = ((TileEntitySign) titleSignField.get(signGui)).signText[(int) editLineField.get(signGui)].getUnformattedText();
                     String clipboard = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
                     ((TileEntitySign) titleSignField.get(signGui)).signText[(int) editLineField.get(signGui)] = new ChatComponentText(lineContent + clipboard);
                 } catch (NoSuchFieldException | IllegalAccessException | IOException |
